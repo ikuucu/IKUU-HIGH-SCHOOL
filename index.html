@@ -3,191 +3,497 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ikuu Boys High School | Onwards to Excellence</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Ikuu Boys High School - Student Portal</title>
+    <!-- Tailwind CSS Script CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- FontAwesome Vector Icon Library -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Html2Pdf Engine CDN Requirement -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+    
+    <!-- Official School Badge Application Shortcuts -->
+    <link rel="icon" type="image/png" href="logo.png">
+    <link rel="apple-touch-icon" href="logo.png">
+    
+    <style>
+        /* Custom scrollbar matching school brand aesthetics */
+        ::-webkit-scrollbar { width: 6px; height: 6px; }
+        ::-webkit-scrollbar-track { background: #f1f5f9; }
+        ::-webkit-scrollbar-thumb { background: #1e3a8a; border-radius: 4px; }
+    </style>
 </head>
-<body class="bg-gray-50 font-sans text-gray-800">
+<body class="bg-slate-100 min-h-screen text-slate-800 antialiased font-sans flex flex-col">
 
-    <div class="bg-blue-950 text-yellow-400 text-xs py-2 px-4 sticky top-0 z-50 border-b border-blue-900">
-        <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
-            <div class="flex items-center gap-4">
-                <span>📍 P.O Box 40 – 60400, Chuka</span>
-                <span class="hidden md:inline">📞 0739902196 / 0715054398</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <span>📧 ikuuboysh@yahoo.co.uk</span>
-                <span class="bg-yellow-400 text-blue-950 px-2 py-0.5 rounded font-bold">KNEC Code: 19300010</span>
-            </div>
-        </div>
-    </div>
-
-    <nav class="bg-blue-900 text-white shadow-md sticky top-8 z-40">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-20">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 bg-white p-0.5 rounded-full shadow-inner flex items-center justify-center overflow-hidden border border-yellow-400 shrink-0">
-                        <img src="logo.png" alt="Ikuu Logo" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="hidden w-full h-full bg-blue-200 text-blue-950 font-black text-xs items-center justify-center">IB</div>
-                    </div>
-                    <div>
-                        <h1 class="text-xl font-extrabold tracking-tight leading-none text-white">IKUU BOYS HIGH SCHOOL</h1>
-                        <p class="text-xs text-yellow-400 font-medium tracking-widest mt-1 uppercase">Onwards to Excellence</p>
-                    </div>
-                </div>
-                <div class="hidden lg:flex items-center space-x-6 text-sm font-semibold uppercase tracking-wider">
-                    <a href="#" class="text-yellow-400 border-b-2 border-yellow-400 pb-1">Home</a>
-                    <a href="#about" class="hover:text-yellow-400 transition">About Us</a>
-                    <a href="#academics" class="hover:text-yellow-400 transition">Academics</a>
-                    <a href="portal.html" class="bg-yellow-400 text-blue-950 px-3 py-1.5 rounded-lg font-bold hover:bg-yellow-500 transition shadow-sm normal-case tracking-normal">Student Portal 🔑</a>
-                    <a href="#contact" class="hover:text-yellow-400 transition">Contact Us</a>
+    <!-- ========================================== -->
+    <!-- PORTAL HEADER MODULE                       -->
+    <!-- ========================================== -->
+    <header class="bg-blue-900 text-white shadow-md sticky top-0 z-50">
+        <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <!-- Official School Badge Reflected Locally -->
+                <img src="logo.png" 
+                     alt="Ikuu Boys High School Crest" 
+                     class="w-10 h-10 object-contain bg-white p-0.5 rounded-lg shadow-sm">
+                <div>
+                    <h1 class="text-xl font-black tracking-tight uppercase">Ikuu Boys High School</h1>
+                    <p class="text-xs text-blue-200 tracking-wider">Official Student Results Portal</p>
                 </div>
             </div>
-        </div>
-    </nav>
-
-    <header class="relative bg-blue-900 text-white py-32 px-6 text-center bg-cover bg-center" style="background-image: linear-gradient(rgba(15, 23, 42, 0.8), rgba(15, 23, 42, 0.85)), url('ikuu gate.jpg');">
-        <div class="max-w-4xl mx-auto">
-            <span class="bg-yellow-400 text-blue-950 font-bold px-4 py-1.5 rounded-full text-xs uppercase tracking-widest inline-block mb-4">National School | Tharaka Nithi</span>
-            <h2 class="text-4xl md:text-6xl font-black mb-6 leading-tight">Moulding Leaders & Achieving Academic Distinction</h2>
-            <p class="text-lg md:text-xl text-gray-300 mb-8 max-w-2xl mx-auto">Welcome to Ikuu Boys High School. We are dedicated to cultivating discipline, resourcefulness, and a strong track record of excellence.</p>
-            <div class="flex flex-wrap justify-center gap-4">
-                <a href="#about" class="bg-yellow-400 hover:bg-yellow-500 text-blue-950 font-bold px-8 py-3.5 rounded-lg shadow-lg transition transform hover:-translate-y-0.5">Learn Our History</a>
-                <a href="portal.html" class="bg-blue-600 hover:bg-blue-700 text-white font-bold px-8 py-3.5 rounded-lg shadow-lg transition transform hover:-translate-y-0.5">Enter Portal</a>
-            </div>
+            <button id="logoutBtn" onclick="handleLogout()" class="hidden bg-rose-600 hover:bg-rose-700 text-white px-4 py-2 rounded-xl text-sm font-semibold shadow transition-all duration-150 flex items-center space-x-2 cursor-pointer">
+                <i class="fa-solid fa-right-from-bracket text-xs"></i>
+                <span>Sign Out</span>
+            </button>
         </div>
     </header>
 
-    <section class="max-w-6xl mx-auto px-4 -mt-10 relative z-10">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-            <div class="bg-white p-6 rounded-xl shadow-xl text-center border-b-4 border-yellow-400">
-                <p class="text-3xl font-extrabold text-blue-900">1964</p>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Founded</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-xl text-center border-b-4 border-blue-900">
-                <p class="text-3xl font-extrabold text-blue-900">National</p>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">School Status</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-xl text-center border-b-4 border-green-600">
-                <p class="text-3xl font-extrabold text-blue-900">9.8+</p>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">Target Mean Score</p>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-xl text-center border-b-4 border-purple-600">
-                <p class="text-3xl font-extrabold text-blue-900">95%+</p>
-                <p class="text-xs text-gray-500 uppercase font-bold tracking-wider mt-1">University Transition</p>
-            </div>
+    <!-- ========================================== -->
+    <!-- MAIN APPLICATION CONTAINER LAYER           -->
+    <!-- ========================================== -->
+    <main class="flex-grow max-w-6xl w-full mx-auto p-4 flex items-center justify-center">
+        
+        <!-- INITIALIZING LOADING ELEMENT MASK -->
+        <div id="portalSplashLoader" class="hidden text-center space-y-4">
+            <i class="fa-solid fa-circle-notch animate-spin text-4xl text-blue-900"></i>
+            <p class="text-sm font-medium text-slate-500">Checking terminal security token matrices...</p>
         </div>
-    </section>
 
-    <section id="about" class="max-w-7xl mx-auto px-4 py-20 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-            <span class="text-sm font-bold text-blue-900 tracking-widest uppercase">Our Heritage</span>
-            <h3 class="text-3xl md:text-4xl font-extrabold text-slate-900 mt-2 mb-6">Over 60 Years of Institutional Excellence</h3>
-            <p class="text-gray-600 mb-4 leading-relaxed">
-                Ikuu Boys' High School was established in 1964 as a provincial day secondary school on the grounds currently occupied by Ikuu Girls' High School, under the sponsorship of the **Presbyterian Church of East Africa (PCEA)**.
-            </p>
-            <p class="text-gray-600 mb-6 leading-relaxed">
-                In 1965, the school relocated to its current site through generous land donations and infrastructural support from the local community. Through decades of steady growth, development, and impeccable quality standards, the school officially transitioned into a fully fledged National School in 2012, admitting its first national cohort in 2013.
-            </p>
-            <div class="border-l-4 border-yellow-400 pl-4 italic text-gray-700 font-medium">
-                "Our vibrant curriculum spans rigorous classroom learning alongside remarkable achievements in co-curricular categories, notably the Kenya National Drama and Film Festivals."
-            </div>
-        </div>
-        <div class="grid grid-cols-2 gap-4">
-            <div class="col-span-2 bg-gray-200 rounded-2xl h-64 bg-cover bg-center shadow-md relative group overflow-hidden" style="background-image: url('admin.jpg');">
-                <div class="absolute inset-0 bg-black/40 flex items-end p-4">
-                    <span class="text-white text-sm font-bold bg-blue-900/80 px-3 py-1 rounded">Administration Complex</span>
-                </div>
-            </div>
-            <div class="bg-gray-200 rounded-2xl h-48 bg-cover bg-center shadow-sm" style="background-image: url('stud.jpg');"></div>
-            <div class="bg-gray-200 rounded-2xl h-48 bg-cover bg-center shadow-sm" style="background-image: url('doc.jpg');"></div>
-        </div>
-    </section>
+        <!-- ========================================== -->
+        <!-- GATEWAY AUTHENTICATION COMPONENT           -->
+        <!-- ========================================== -->
+        <div id="loginCard" class="bg-white p-8 rounded-2xl shadow-xl w-full max-w-md border border-slate-200/80 my-8 transition-all duration-200">
+            
+            <!-- Global Action Intercept Alerts Notification Space -->
+            <div id="successMsg" class="hidden mb-6 p-4 bg-emerald-50 border-l-4 border-emerald-500 text-emerald-800 text-sm rounded-r-xl font-medium shadow-sm"></div>
 
-    <section id="academics" class="bg-slate-100 py-16 px-4">
-        <div class="max-w-7xl mx-auto text-center mb-12">
-            <h3 class="text-3xl font-extrabold text-blue-950">Internal Portals & Learning Programs</h3>
-            <p class="text-gray-600 mt-2">Access internally managed systems for student performance, tracking structures, and course materials.</p>
-        </div>
-        <div class="max-w-5xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-            <div class="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between">
-                <div>
-                    <div class="text-2xl mb-2">📈</div>
-                    <h4 class="text-xl font-bold text-blue-900 mb-2">Drive for Academic Dominance</h4>
-                    <p class="text-sm text-gray-600 mb-4">Through joint commitment by our students ("The Titans"), staff, and parents, we consistently set measurable, high targets to maintain our competitive national standing.</p>
-                    <img src="9.8.jpg" alt="Academic Target Banner" class="rounded-lg mb-4 w-full h-48 object-cover object-top shadow-inner">
+            <!-- VIEW CONTEXT A: ENTRY SIGN IN LOGINS -->
+            <div id="loginView">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Student Identity Sign-In</h2>
+                    <p class="text-sm text-slate-500 mt-1">Provide credential vectors to access grades</p>
                 </div>
-                <a href="portal.html" class="text-center bg-blue-900 text-white font-bold py-2.5 px-4 rounded hover:bg-blue-950 transition text-sm">Open Student Portal Hub</a>
-            </div>
-            <div class="bg-white p-6 rounded-xl shadow-md flex flex-col justify-between">
-                <div>
-                    <div class="text-2xl mb-2">🚌</div>
-                    <h4 class="text-xl font-bold text-blue-900 mb-2">Curriculum & Co-Curricular Transport</h4>
-                    <p class="text-sm text-gray-600 mb-4">Our modern school transport fleet guarantees secure travel arrays for all external academic seminars, contest visits, and drama festival presentations.</p>
-                    <img src="bus.jpg" alt="School Fleet Transport" class="rounded-lg mb-4 w-full h-48 object-cover shadow-inner">
-                </div>
-                <a href="#contact" class="text-center bg-yellow-400 text-blue-950 font-bold py-2.5 px-4 rounded hover:bg-yellow-500 transition text-sm">Inquire About Admissions</a>
-            </div>
-        </div>
-    </section>
 
-    <section class="max-w-7xl mx-auto px-4 py-12">
-        <h3 class="text-2xl font-bold text-blue-950 text-center mb-8">Life at Ikuu Boys</h3>
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-            <div class="md:col-span-3 rounded-xl overflow-hidden shadow-lg relative group h-80 bg-cover bg-center" style="background-image: url('students.jpg');">
-                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent flex items-end p-6">
+                <div id="errorMsg" class="hidden mb-4 p-3 bg-rose-50 border-l-4 border-rose-500 text-rose-800 text-xs rounded-r-lg font-medium shadow-sm"></div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)" class="space-y-4">
                     <div>
-                        <p class="text-yellow-400 font-bold text-sm uppercase tracking-wider">Student Life</p>
-                        <h4 class="text-white text-xl font-extrabold">Active Student Assembly on Campus Grounds</h4>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Admission Number</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-id-card absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" id="admNo" required placeholder="Enter Admission No. (e.g. 8714)" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-slate-900 font-medium transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Portal Password</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-lock absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="password" id="password" required placeholder="••••••••" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 text-slate-900 font-medium transition">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="w-full bg-blue-900 hover:bg-blue-800 text-white font-bold py-3.5 rounded-xl transition duration-150 shadow-md flex items-center justify-center space-x-2 cursor-pointer mt-2">
+                        <i class="fa-solid fa-right-to-bracket text-xs"></i>
+                        <span>Authenticate Portal Session</span>
+                    </button>
+                </form>
+
+                <div class="mt-6 pt-6 border-t border-slate-100 text-center text-sm text-slate-600">
+                    First time utilizing the web portal? 
+                    <button onclick="toggleAuthMode('signup')" class="text-blue-700 font-bold hover:underline block mx-auto mt-1 cursor-pointer">Register Student Profile Account</button>
+                </div>
+            </div>
+
+            <!-- VIEW CONTEXT B: NEW STUDENT SIGN UP PROVISIONS -->
+            <div id="signupView" class="hidden">
+                <div class="text-center mb-6">
+                    <h2 class="text-2xl font-black text-slate-900 tracking-tight">Account System Setup</h2>
+                    <p class="text-sm text-slate-500 mt-1">Establish validation linkage to school record matrices</p>
+                </div>
+
+                <div id="signupErrorMsg" class="hidden mb-4 p-3 bg-rose-50 border-l-4 border-rose-500 text-rose-800 text-xs rounded-r-lg font-medium shadow-sm"></div>
+
+                <form id="signupForm" onsubmit="handleSignUp(event)" class="space-y-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Your Admission Number</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-hashtag absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="text" id="signupSampleAdm" required placeholder="Must accurately align with official documents" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 text-slate-900 font-medium transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 uppercase tracking-widest mb-1.5">Assign Account Password</label>
+                        <div class="relative">
+                            <i class="fa-solid fa-key absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm"></i>
+                            <input type="password" id="signupPassword" required placeholder="Create a secure web gate code" class="w-full pl-11 pr-4 py-3 bg-slate-50 border border-slate-300 rounded-xl focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 text-slate-900 font-medium transition">
+                        </div>
+                    </div>
+
+                    <button type="submit" id="signupSubmitBtn" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-bold py-3.5 rounded-xl transition duration-150 shadow-md flex items-center justify-center space-x-2 cursor-pointer mt-2">
+                        <i class="fa-solid fa-user-plus text-xs"></i>
+                        <span>Provision Profile Handshake</span>
+                    </button>
+                </form>
+
+                <div class="mt-6 pt-6 border-t border-slate-100 text-center text-sm text-slate-600">
+                    Profile connection already deployed? 
+                    <button onclick="toggleAuthMode('login')" class="text-blue-700 font-bold hover:underline block mx-auto mt-1 cursor-pointer">Return to Secure Log In</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ========================================== -->
+        <!-- STUDENT INTEL PERFORMANCE DASHBOARD       -->
+        <!-- ========================================== -->
+        <div id="dashboard" class="hidden w-full max-w-4xl space-y-6 py-6 transition-all duration-300">
+            
+            <div class="flex justify-end px-1">
+                <button onclick="downloadReportCardPDF()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow transition-all duration-150 flex items-center space-x-2 cursor-pointer">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>Download Report PDF</span>
+                </button>
+            </div>
+
+            <!-- Printable Node Wrapper Target Frame -->
+            <div id="printableReportCardArea" class="space-y-6 bg-transparent p-1 rounded-2xl">
+                
+                <!-- Student Header Profile Strip -->
+                <div class="bg-gradient-to-r from-blue-900 to-indigo-950 text-white p-6 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 border border-blue-950">
+                    <div class="space-y-1">
+                        <span class="text-[10px] font-bold tracking-widest bg-blue-800 text-blue-200 px-3 py-1 rounded-full uppercase border border-blue-700/50">Student Profile Authenticated</span>
+                        <h2 id="studentName" class="text-3xl font-black mt-2 tracking-tight">--</h2>
+                        <p class="text-sm text-blue-200 font-medium flex items-center gap-3">
+                            <span>Admission No: <strong id="dispAdm" class="text-white font-bold">--</strong></span>
+                            <span class="opacity-30 text-lg">|</span>
+                            <span>Class Stream: <strong id="dispStream" class="text-white font-bold">--</strong></span>
+                        </p>
+                    </div>
+                    
+                    <!-- Performance Snapshot Summary Metrics -->
+                    <div class="grid grid-cols-3 gap-3 text-center text-slate-900 min-w-[320px]">
+                        <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
+                            <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Total Score</p>
+                            <p id="totalPoints" class="text-2xl font-black text-blue-900 mt-0.5">--</p>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
+                            <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Mean Grade</p>
+                            <p id="meanGrade" class="text-2xl font-black text-emerald-700 mt-0.5">--</p>
+                        </div>
+                        <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
+                            <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Class Position</p>
+                            <p id="classPosition" class="text-2xl font-black text-amber-700 mt-0.5">--</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Terminal Assessment Report Data Sheet Block -->
+                <div class="bg-white rounded-2xl shadow-md border border-slate-200/80 overflow-hidden">
+                    <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                        <h3 class="font-bold text-slate-800 tracking-tight flex items-center gap-2">
+                            <i class="fa-solid fa-graduation-cap text-blue-900"></i>
+                            Terminal Evaluation Performance Matrix
+                        </h3>
+                        <span class="text-xs bg-slate-200/80 text-slate-600 px-2.5 py-1 rounded-md font-bold tracking-wide">Current Evaluation Cycle</span>
+                    </div>
+                    
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-slate-100/80 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-widest">
+                                    <th class="p-4 pl-6">Subject Course Module</th>
+                                    <th class="p-4 text-center">Raw Score (%)</th>
+                                    <th class="p-4 text-center">Attained Mark Grade</th>
+                                    <th class="p-4 pl-4">Subject Instructor Remarks</th>
+                                </tr>
+                            </thead>
+                            <tbody id="resultsTableBody" class="divide-y divide-slate-100 text-sm font-medium text-slate-700">
+                                <!-- Populated on session bootstrap callbacks dynamically -->
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
         </div>
-    </section>
 
-    <section id="contact" class="bg-blue-950 text-gray-300 pt-20 pb-10 px-4">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 border-b border-blue-900 pb-12">
-            <div>
-                <h4 class="text-white text-xl font-extrabold mb-4">🛡️ IKUU BOYS HIGH SCHOOL</h4>
-                <p class="text-sm text-gray-400 leading-relaxed mb-4">
-                    An institution backed by a deeply rooted history of spiritual alignment, exceptional community trust, and premium academic standards.
-                </p>
-                <p class="text-xs text-yellow-400 font-bold">MOTTO: Onwards to Excellence</p>
-            </div>
-            <div>
-                <h4 class="text-white text-lg font-bold mb-4">Official Channels</h4>
-                <ul class="space-y-3 text-sm text-gray-400">
-                    <li>📍 <strong class="text-gray-200">Address:</strong> P.O BOX 40 – 60400, CHUKA.</li>
-                    <li>📞 <strong class="text-gray-200">Phone lines:</strong> 0739902196 / 0715054398</li>
-                    <li>✉️ <strong class="text-gray-200">Email:</strong> ikuuboysh@yahoo.co.uk</li>
-                </ul>
-            </div>
-            <div>
-                <h4 class="text-white text-lg font-bold mb-4">Leave a Message</h4>
-                <form class="space-y-2 text-sm text-slate-900">
-                    <input type="text" placeholder="Your Name" class="w-full p-2.5 rounded bg-white border border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-400">
-                    <input type="email" placeholder="Your Email" class="w-full p-2.5 rounded bg-white border border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-400">
-                    <textarea placeholder="Your Message..." rows="3" class="w-full p-2.5 rounded bg-white border border-transparent focus:outline-none focus:ring-2 focus:ring-yellow-400"></textarea>
-                    <button type="button" class="w-full bg-yellow-400 hover:bg-yellow-500 text-blue-950 font-bold py-2 rounded transition uppercase tracking-wider text-xs">Submit Form</button>
-                </form>
-            </div>
-        </div>
-        <div class="max-w-7xl mx-auto text-center text-xs text-gray-500 mt-8">
-            &copy; 2026 Ikuu Boys High School. All Rights Reserved. Built with modern web frameworks.
-        </div>
-    </section>
-<script>
-  // Links your app description file
-  const link = document.createElement('link');
-  link.rel = 'manifest';
-  link.href = 'manifest.json';
-  document.head.appendChild(link);
+    </main>
 
-  // Activates the phone installer engine
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js')
-      .then(() => console.log("Portal Mobile Engine Active"))
-      .catch(err => console.log("Engine halted: ", err));
-  }
-</script>
+    <!-- ========================================== -->
+    <!-- SECURE APPLICATION INFRASTRUCTURE FOOTER   -->
+    <!-- ========================================== -->
+    <footer class="bg-slate-900 text-slate-400 text-[11px] py-4 border-t border-slate-800 mt-auto">
+        <div class="max-w-6xl mx-auto px-4 text-center tracking-wider">
+            <p>&copy; 2026 Ikuu Boys High School Information Infrastructure. Automated Cryptographic RLS Sandboxing.</p>
+        </div>
+    </footer>
+
+    <!-- SUPABASE DISTRIBUTED CLIENT ENGINE -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // ==========================================
+        // AMBIENT API CONNECTION INJECTION TARGETS
+        // ==========================================
+        const SUPABASE_URL = 'https://tfxdglicymhrltqquyytc.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmeGRnbGljeW1ocmx0cXF1eXRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1Mjk4NDEsImV4cCI6MjA5NTEwNTg0MX0.TUO9FNqTa68XZI6dklKs18lpYse52ZUsiEzSFWJGweo';
+        
+        const dbClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        // Global cache holder for filename formatting
+        let currentStudentAdmissionNumber = "ReportCard";
+
+        // ==========================================
+        // UI ANIMATION AND STRUCTURAL CARD SWITCHES  
+        // ==========================================
+        function toggleAuthMode(targetMode) {
+            document.getElementById("errorMsg").classList.add("hidden");
+            document.getElementById("signupErrorMsg").classList.add("hidden");
+            document.getElementById("successMsg").classList.add("hidden");
+
+            if (targetMode === 'signup') {
+                document.getElementById("loginView").classList.add("hidden");
+                document.getElementById("signupView").classList.remove("hidden");
+            } else {
+                document.getElementById("signupView").classList.add("hidden");
+                document.getElementById("loginView").classList.remove("hidden");
+            }
+        }
+
+        // Intercept deployment pipeline on canvas DOM updates
+        window.addEventListener('DOMContentLoaded', async () => {
+            document.getElementById("loginCard").classList.add("hidden");
+            document.getElementById("portalSplashLoader").classList.remove("hidden");
+
+            try {
+                const { data: { session } } = await dbClient.auth.getSession();
+                if (session?.user) {
+                    await bootstrapDashboardSession(session.user.id);
+                } else {
+                    document.getElementById("loginCard").classList.remove("hidden");
+                }
+            } catch (err) {
+                document.getElementById("loginCard").classList.remove("hidden");
+            } finally {
+                document.getElementById("portalSplashLoader").classList.add("hidden");
+            }
+        });
+
+        // ==========================================
+        // SYSTEM REGISTRATION PIPELINE INTERCEPTOR
+        // ==========================================
+        async function handleSignUp(event) {
+            event.preventDefault();
+            
+            const admNo = document.getElementById("signupSampleAdm").value.trim();
+            const passInput = document.getElementById("signupPassword").value;
+            const errorBox = document.getElementById("signupErrorMsg");
+            const submitBtn = document.getElementById("signupSubmitBtn");
+            
+            // Reconstruct background unverified custom layout email identifier string
+            const cleanPseudoEmail = `${admNo}@ikuuboys.internal`;
+
+            errorBox.classList.add("hidden");
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Binding Record Identity...`;
+
+            try {
+                // 1. Cross check if student registration mapping exists in baseline relational table schemas
+                const { data: matchedRecords, error: matchError } = await dbClient
+                    .from('students')
+                    .select('admission_number, id')
+                    .eq('admission_number', admNo);
+
+                if (matchError || !matchedRecords || matchedRecords.length === 0) {
+                    throw new Error("Admission verification string failed. Index not listed on master registry lists.");
+                }
+
+                if (matchedRecords[0].id !== null) {
+                    throw new Error("This admission entry is already permanently attached to an active authorization token.");
+                }
+
+                // 2. Perform background registration bypassing interactive authorization validation calls
+                const { data: authResult, error: registerError } = await dbClient.auth.signUp({
+                    email: cleanPseudoEmail,
+                    password: passInput
+                });
+
+                if (registerError) throw new Error(registerError.message);
+                if (!authResult?.user?.id) throw new Error("Database provisioning engine dropped signature return values.");
+
+                const assignedUuid = authResult.user.id;
+
+                // 3. Inject new verification identity parameter backward maps to root profiles rows
+                const { error: linkError } = await dbClient
+                    .from('students')
+                    .update({ id: assignedUuid })
+                    .eq('admission_number', admNo);
+
+                if (linkError) throw new Error("Backlink linkage assignment exception: " + linkError.message);
+
+                // Smoothly route back into signature validation forms
+                document.getElementById("signupForm").reset();
+                toggleAuthMode('login');
+                
+                const mainSuccess = document.getElementById("successMsg");
+                mainSuccess.innerText = `Registration success! Use Admission Number ${admNo} to sign into the system matrix.`;
+                mainSuccess.classList.remove("hidden");
+
+            } catch (err) {
+                errorBox.innerText = err.message;
+                errorBox.classList.remove("hidden");
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-user-plus text-xs"></i> Provision Profile Handshake`;
+            }
+        }
+
+        // ==========================================
+        // SYSTEM AUTHENTICATION INITIALIZATION ENTRY
+        // ==========================================
+        async function handleLogin(event) {
+            event.preventDefault();
+            
+            const admInput = document.getElementById("admNo").value.trim();
+            const passInput = document.getElementById("password").value;
+            const errorBox = document.getElementById("errorMsg");
+            const submitBtn = document.getElementById("submitBtn");
+
+            errorBox.classList.add("hidden"); 
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = `<i class="fa-solid fa-spinner animate-spin"></i> Syncing Node Authentication...`;
+
+            try {
+                // Reassemble hidden layout identity routing masks
+                const resolvedEmail = `${admInput}@ikuuboys.internal`;
+
+                const { data: authData, error: authError } = await dbClient.auth.signInWithPassword({
+                    email: resolvedEmail,
+                    password: passInput,
+                });
+
+                if (authError) throw new Error("Invalid student credentials or unauthorized registration assignment rows.");
+
+                await bootstrapDashboardSession(authData.user.id);
+                
+            } catch (catchErr) {
+                errorBox.innerText = catchErr.message;
+                errorBox.classList.remove("hidden");
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket text-xs"></i> Authenticate Portal Session`;
+            }
+        }
+
+        // ==========================================
+        // DASHBOARD COMPONENT POPULATOR ENGINE       
+        // ==========================================
+        async function bootstrapDashboardSession(userUuid) {
+            try {
+                // Read authenticated record parameters matching relational schemas 
+                const { data: studentProfile, error: profErr } = await dbClient
+                    .from('students')
+                    .select('*')
+                    .eq('id', userUuid)
+                    .maybeSingle();
+                
+                if (profErr || !studentProfile) throw new Error("Unable to correlate identity index with database student parameters.");
+
+                // Save to context state variable for file download tags
+                currentStudentAdmissionNumber = studentProfile.admission_number || "Student_Report";
+
+                // Read matching academic transcript mark sheets
+                const { data: gradesData } = await dbClient
+                    .from('results')
+                    .select('*')
+                    .eq('student_id', studentProfile.admission_number);
+
+                // Inject profiles strings back into DOM layouts
+                document.getElementById("studentName").innerText = studentProfile.full_name || 'Anonymous Student Context';
+                document.getElementById("dispAdm").innerText = studentProfile.admission_number || '--';
+                document.getElementById("dispStream").innerText = studentProfile.stream || '--';
+                document.getElementById("totalPoints").innerText = studentProfile.total_marks || '--';
+                document.getElementById("meanGrade").innerText = studentProfile.mean_grade || '--';
+                document.getElementById("classPosition").innerText = studentProfile.position || '--';
+
+                const tableBody = document.getElementById("resultsTableBody");
+                tableBody.innerHTML = ""; 
+
+                if (gradesData && gradesData.length > 0) {
+                    gradesData.forEach(item => {
+                        tableBody.innerHTML += `
+                            <tr class="hover:bg-slate-50/50 transition border-b border-slate-100">
+                                <td class="p-4 pl-6 font-semibold text-slate-900">${item.subject_name}</td>
+                                <td class="p-4 text-center font-mono font-bold text-slate-800">${item.score}</td>
+                                <td class="p-4 text-center font-bold text-blue-900">${item.letter_grade}</td>
+                                <td class="p-4 italic text-slate-500 pl-4">${item.teacher_remark || 'System processed.'}</td>
+                            </tr>`;
+                    });
+                } else {
+                    tableBody.innerHTML = `
+                        <tr>
+                            <td colspan="4" class="p-8 text-center text-slate-400 italic font-medium">No official evaluated mark lists associated with this profile tracking index currently.</td>
+                        </tr>`;
+                }
+
+                // Smooth layout toggles
+                document.getElementById("loginCard").classList.add("hidden");
+                document.getElementById("dashboard").classList.remove("hidden");
+                document.getElementById("logoutBtn").classList.remove("hidden");
+
+            } catch (err) {
+                alert("Data sync connection dropout: " + err.message);
+                handleLogout();
+            }
+        }
+
+        // ==========================================
+        // CRYPTOGRAPHIC PDF RECONSTRUCTION ENGINE  
+        // ==========================================
+        function downloadReportCardPDF() {
+            const reportElement = document.getElementById("printableReportCardArea");
+            
+            // Set dynamic rendering configurations
+            const renderOptions = {
+                margin:       [0.4, 0.4, 0.4, 0.4], 
+                filename:     `Ikuu_Boys_Report_Card_${currentStudentAdmissionNumber}.pdf`,
+                image:        { type: 'jpeg', quality: 0.98 },
+                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
+                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+            };
+
+            // Capture DOM tree and pass to the generation pipeline
+            html2pdf().set(renderOptions).from(reportElement).save();
+        }
+
+        // ==========================================
+        // TERMINATE SESSION LOGOUT SEQUENCE         
+        // ==========================================
+        async function handleLogout() {
+            if (dbClient) {
+                await dbClient.auth.signOut();
+            }
+            
+            // Purge and return arrays to baseline state metrics
+            document.getElementById("loginCard").classList.remove("hidden");
+            document.getElementById("dashboard").classList.add("hidden");
+            document.getElementById("logoutBtn").classList.add("hidden");
+            
+            document.getElementById("loginForm").reset();
+            
+            const submitBtn = document.getElementById("submitBtn");
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket text-xs"></i> Authenticate Portal Session`;
+        }
+
+        // Connect Service Worker Manifest to enable Mobile installation prompts
+        const linkManifest = document.createElement('link');
+        linkManifest.rel = 'manifest';
+        linkManifest.href = 'manifest.json';
+        document.head.appendChild(linkManifest);
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('sw.js')
+                .then(() => console.log("Portal Mobile Engine Active"))
+                .catch(err => console.log("Engine halted: ", err));
+        }
+    </script>
 </body>
 </html>
