@@ -8,13 +8,6 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <!-- FontAwesome Vector Icon Library -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Html2Pdf Engine CDN Requirement -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
-    
-    <!-- Official School Badge Application Shortcuts -->
-    <link rel="icon" type="image/png" href="logo.png">
-    <link rel="apple-touch-icon" href="logo.png">
-    
     <style>
         /* Custom scrollbar matching school brand aesthetics */
         ::-webkit-scrollbar { width: 6px; height: 6px; }
@@ -30,10 +23,9 @@
     <header class="bg-blue-900 text-white shadow-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex justify-between items-center">
             <div class="flex items-center space-x-3">
-                <!-- Official School Badge Reflected Locally -->
-                <img src="logo.png" 
-                     alt="Ikuu Boys High School Crest" 
-                     class="w-10 h-10 object-contain bg-white p-0.5 rounded-lg shadow-sm">
+                <div class="bg-white text-blue-900 p-2 rounded-full w-10 h-10 flex items-center justify-center font-black text-lg shadow-inner">
+                    IB
+                </div>
                 <div>
                     <h1 class="text-xl font-black tracking-tight uppercase">Ikuu Boys High School</h1>
                     <p class="text-xs text-blue-200 tracking-wider">Official Student Results Portal</p>
@@ -148,70 +140,59 @@
         <!-- ========================================== -->
         <div id="dashboard" class="hidden w-full max-w-4xl space-y-6 py-6 transition-all duration-300">
             
-            <div class="flex justify-end px-1">
-                <button onclick="downloadReportCardPDF()" class="bg-emerald-600 hover:bg-emerald-700 text-white font-bold px-5 py-2.5 rounded-xl text-sm shadow transition-all duration-150 flex items-center space-x-2 cursor-pointer">
-                    <i class="fa-solid fa-file-pdf"></i>
-                    <span>Download Report PDF</span>
-                </button>
-            </div>
-
-            <!-- Printable Node Wrapper Target Frame -->
-            <div id="printableReportCardArea" class="space-y-6 bg-transparent p-1 rounded-2xl">
+            <!-- Student Header Profile Strip -->
+            <div class="bg-gradient-to-r from-blue-900 to-indigo-950 text-white p-6 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 border border-blue-950">
+                <div class="space-y-1">
+                    <span class="text-[10px] font-bold tracking-widest bg-blue-800 text-blue-200 px-3 py-1 rounded-full uppercase border border-blue-700/50">Student Profile Authenticated</span>
+                    <h2 id="studentName" class="text-3xl font-black mt-2 tracking-tight">--</h2>
+                    <p class="text-sm text-blue-200 font-medium flex items-center gap-3">
+                        <span>Admission No: <strong id="dispAdm" class="text-white font-bold">--</strong></span>
+                        <span class="opacity-30 text-lg">|</span>
+                        <span>Class Stream: <strong id="dispStream" class="text-white font-bold">--</strong></span>
+                    </p>
+                </div>
                 
-                <!-- Student Header Profile Strip -->
-                <div class="bg-gradient-to-r from-blue-900 to-indigo-950 text-white p-6 rounded-2xl shadow-xl flex flex-col md:flex-row md:items-center justify-between gap-6 border border-blue-950">
-                    <div class="space-y-1">
-                        <span class="text-[10px] font-bold tracking-widest bg-blue-800 text-blue-200 px-3 py-1 rounded-full uppercase border border-blue-700/50">Student Profile Authenticated</span>
-                        <h2 id="studentName" class="text-3xl font-black mt-2 tracking-tight">--</h2>
-                        <p class="text-sm text-blue-200 font-medium flex items-center gap-3">
-                            <span>Admission No: <strong id="dispAdm" class="text-white font-bold">--</strong></span>
-                            <span class="opacity-30 text-lg">|</span>
-                            <span>Class Stream: <strong id="dispStream" class="text-white font-bold">--</strong></span>
-                        </p>
+                <!-- Performance Snapshot Summary Metrics -->
+                <div class="grid grid-cols-3 gap-3 text-center text-slate-900 min-w-[320px]">
+                    <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
+                        <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Total Score</p>
+                        <p id="totalPoints" class="text-2xl font-black text-blue-900 mt-0.5">--</p>
                     </div>
-                    
-                    <!-- Performance Snapshot Summary Metrics -->
-                    <div class="grid grid-cols-3 gap-3 text-center text-slate-900 min-w-[320px]">
-                        <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
-                            <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Total Score</p>
-                            <p id="totalPoints" class="text-2xl font-black text-blue-900 mt-0.5">--</p>
-                        </div>
-                        <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
-                            <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Mean Grade</p>
-                            <p id="meanGrade" class="text-2xl font-black text-emerald-700 mt-0.5">--</p>
-                        </div>
-                        <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
-                            <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Class Position</p>
-                            <p id="classPosition" class="text-2xl font-black text-amber-700 mt-0.5">--</p>
-                        </div>
+                    <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
+                        <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Mean Grade</p>
+                        <p id="meanGrade" class="text-2xl font-black text-emerald-700 mt-0.5">--</p>
+                    </div>
+                    <div class="bg-white/95 backdrop-blur p-3 rounded-xl shadow border border-slate-100">
+                        <p class="text-[10px] uppercase font-extrabold tracking-wider text-slate-400">Class Position</p>
+                        <p id="classPosition" class="text-2xl font-black text-amber-700 mt-0.5">--</p>
                     </div>
                 </div>
+            </div>
 
-                <!-- Terminal Assessment Report Data Sheet Block -->
-                <div class="bg-white rounded-2xl shadow-md border border-slate-200/80 overflow-hidden">
-                    <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
-                        <h3 class="font-bold text-slate-800 tracking-tight flex items-center gap-2">
-                            <i class="fa-solid fa-graduation-cap text-blue-900"></i>
-                            Terminal Evaluation Performance Matrix
-                        </h3>
-                        <span class="text-xs bg-slate-200/80 text-slate-600 px-2.5 py-1 rounded-md font-bold tracking-wide">Current Evaluation Cycle</span>
-                    </div>
-                    
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left border-collapse">
-                            <thead>
-                                <tr class="bg-slate-100/80 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-widest">
-                                    <th class="p-4 pl-6">Subject Course Module</th>
-                                    <th class="p-4 text-center">Raw Score (%)</th>
-                                    <th class="p-4 text-center">Attained Mark Grade</th>
-                                    <th class="p-4 pl-4">Subject Instructor Remarks</th>
-                                </tr>
-                            </thead>
-                            <tbody id="resultsTableBody" class="divide-y divide-slate-100 text-sm font-medium text-slate-700">
-                                <!-- Populated on session bootstrap callbacks dynamically -->
-                            </tbody>
-                        </table>
-                    </div>
+            <!-- Terminal Assessment Report Data Sheet Block -->
+            <div class="bg-white rounded-2xl shadow-md border border-slate-200/80 overflow-hidden">
+                <div class="px-6 py-4 bg-slate-50 border-b border-slate-200 flex justify-between items-center">
+                    <h3 class="font-bold text-slate-800 tracking-tight flex items-center gap-2">
+                        <i class="fa-solid fa-graduation-cap text-blue-900"></i>
+                        Terminal Evaluation Performance Matrix
+                    </h3>
+                    <span class="text-xs bg-slate-200/80 text-slate-600 px-2.5 py-1 rounded-md font-bold tracking-wide">Current Evaluation Cycle</span>
+                </div>
+                
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left border-collapse">
+                        <thead>
+                            <tr class="bg-slate-100/80 border-b border-slate-200 text-xs font-bold text-slate-500 uppercase tracking-widest">
+                                <th class="p-4 pl-6">Subject Course Module</th>
+                                <th class="p-4 text-center">Raw Score (%)</th>
+                                <th class="p-4 text-center">Attained Mark Grade</th>
+                                <th class="p-4 pl-4">Subject Instructor Remarks</th>
+                            </tr>
+                        </thead>
+                        <tbody id="resultsTableBody" class="divide-y divide-slate-100 text-sm font-medium text-slate-700">
+                            <!-- Populated on session bootstrap callbacks dynamically -->
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </div>
@@ -237,9 +218,6 @@
         const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmeGRnbGljeW1ocmx0cXF1eXRjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Nzk1Mjk4NDEsImV4cCI6MjA5NTEwNTg0MX0.TUO9FNqTa68XZI6dklKs18lpYse52ZUsiEzSFWJGweo';
         
         const dbClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-        // Global cache holder for filename formatting
-        let currentStudentAdmissionNumber = "ReportCard";
 
         // ==========================================
         // UI ANIMATION AND STRUCTURAL CARD SWITCHES  
@@ -327,7 +305,7 @@
                     .update({ id: assignedUuid })
                     .eq('admission_number', admNo);
 
-                if (linkError) throw new Error("Backlink linkage assignment exception: " + linkError.message);
+                if (linkError) throw new Error(`Backlink linkage assignment exception: ${linkError.message}`);
 
                 // Smoothly route back into signature validation forms
                 document.getElementById("signupForm").reset();
@@ -396,9 +374,6 @@
                 
                 if (profErr || !studentProfile) throw new Error("Unable to correlate identity index with database student parameters.");
 
-                // Save to context state variable for file download tags
-                currentStudentAdmissionNumber = studentProfile.admission_number || "Student_Report";
-
                 // Read matching academic transcript mark sheets
                 const { data: gradesData } = await dbClient
                     .from('results')
@@ -419,7 +394,7 @@
                 if (gradesData && gradesData.length > 0) {
                     gradesData.forEach(item => {
                         tableBody.innerHTML += `
-                            <tr class="hover:bg-slate-50/50 transition border-b border-slate-100">
+                            <tr class="hover:bg-slate-50 transition border-b border-slate-100">
                                 <td class="p-4 pl-6 font-semibold text-slate-900">${item.subject_name}</td>
                                 <td class="p-4 text-center font-mono font-bold text-slate-800">${item.score}</td>
                                 <td class="p-4 text-center font-bold text-blue-900">${item.letter_grade}</td>
@@ -445,25 +420,6 @@
         }
 
         // ==========================================
-        // CRYPTOGRAPHIC PDF RECONSTRUCTION ENGINE  
-        // ==========================================
-        function downloadReportCardPDF() {
-            const reportElement = document.getElementById("printableReportCardArea");
-            
-            // Set dynamic rendering configurations
-            const renderOptions = {
-                margin:       [0.4, 0.4, 0.4, 0.4], 
-                filename:     `Ikuu_Boys_Report_Card_${currentStudentAdmissionNumber}.pdf`,
-                image:        { type: 'jpeg', quality: 0.98 },
-                html2canvas:  { scale: 2, useCORS: true, letterRendering: true },
-                jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
-            };
-
-            // Capture DOM tree and pass to the generation pipeline
-            html2pdf().set(renderOptions).from(reportElement).save();
-        }
-
-        // ==========================================
         // TERMINATE SESSION LOGOUT SEQUENCE         
         // ==========================================
         async function handleLogout() {
@@ -481,18 +437,6 @@
             const submitBtn = document.getElementById("submitBtn");
             submitBtn.disabled = false;
             submitBtn.innerHTML = `<i class="fa-solid fa-right-to-bracket text-xs"></i> Authenticate Portal Session`;
-        }
-
-        // Connect Service Worker Manifest to enable Mobile installation prompts
-        const linkManifest = document.createElement('link');
-        linkManifest.rel = 'manifest';
-        linkManifest.href = 'manifest.json';
-        document.head.appendChild(linkManifest);
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('sw.js')
-                .then(() => console.log("Portal Mobile Engine Active"))
-                .catch(err => console.log("Engine halted: ", err));
         }
     </script>
 </body>
