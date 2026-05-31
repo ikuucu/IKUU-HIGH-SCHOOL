@@ -175,6 +175,19 @@
             &copy; 2026 Ikuu Boys High School. All Rights Reserved. Built with modern web frameworks.
         </div>
     </section>
+<script>
+  // Links your app description file
+  const link = document.createElement('link');
+  link.rel = 'manifest';
+  link.href = 'manifest.json';
+  document.head.appendChild(link);
 
+  // Activates the phone installer engine
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('sw.js')
+      .then(() => console.log("Portal Mobile Engine Active"))
+      .catch(err => console.log("Engine halted: ", err));
+  }
+</script>
 </body>
 </html>
