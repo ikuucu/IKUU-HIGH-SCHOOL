@@ -1,23 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
     <title>Ikuu Boys High School | Official Website</title>
     
-    <!-- App & Icon Metadata -->
+    <!-- Icon and Web App Configuration -->
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-touch-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
     
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Ensures the viewport stays consistent in portrait mode */
+        @media screen and (orientation: portrait) {
+            .responsive-container { width: 100%; }
+        }
+    </style>
 </head>
 <body class="bg-gray-50 text-gray-900 font-sans">
 
     <!-- TOP CONTACT BAR -->
-    <div class="bg-blue-950 text-white py-2 px-4 text-[11px] font-semibold tracking-wider">
+    <div class="bg-blue-950 text-white py-2 px-4 text-[10px] font-semibold tracking-wider">
         <div class="max-w-7xl mx-auto flex justify-between">
             <span>📞 0739902196 / 0715054398 | 📧 ikuuboysh@yahoo.co.uk</span>
             <span>📍 P.O Box 40 – 60400, Chuka, Kenya</span>
@@ -27,77 +33,68 @@
     <!-- NAVIGATION -->
     <nav class="sticky top-0 bg-white shadow-md z-50 py-4 border-b-4 border-yellow-500">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
-                <img src="logo.png" alt="Logo" class="w-10 h-10 object-contain">
-                <h1 class="text-2xl font-black text-blue-900 uppercase">Ikuu Boys</h1>
+            <div class="flex items-center gap-2">
+                <img src="logo.png" alt="Logo" class="w-8 h-8 object-contain">
+                <h1 class="text-xl font-black text-blue-900 uppercase">Ikuu Boys</h1>
             </div>
-            <div class="hidden md:flex space-x-8 font-bold text-blue-900 uppercase text-sm">
-                <a href="#about" class="hover:text-yellow-600">Our Story</a>
-                <a href="#academics" class="hover:text-yellow-600">Academics</a>
-                <a href="#life" class="hover:text-yellow-600">Campus Life</a>
-                <a href="portal.html" class="bg-yellow-500 px-5 py-2 rounded text-blue-950 hover:bg-yellow-400 transition">Portal</a>
+            <div class="flex space-x-4 font-bold text-blue-900 uppercase text-[10px] md:text-xs">
+                <a href="#about" class="hover:text-yellow-600">Story</a>
+                <a href="#gallery" class="hover:text-yellow-600">Gallery</a>
+                <a href="portal.html" class="bg-yellow-500 px-4 py-2 rounded text-blue-950 hover:bg-yellow-400">Portal</a>
             </div>
         </div>
     </nav>
 
     <!-- HERO -->
-    <header class="relative h-[60vh] bg-blue-900 flex items-center justify-center text-center">
-        <div class="absolute inset-0 bg-blue-900/70"></div>
-        <div class="relative z-10 text-white px-4">
-            <h1 class="text-5xl md:text-7xl font-black mb-6 uppercase">Onwards to Excellence</h1>
-            <p class="text-xl mb-8 font-light">Nurturing holistic development and academic distinction.</p>
-            <a href="#about" class="bg-white text-blue-900 px-8 py-4 font-bold rounded-lg hover:bg-gray-100 uppercase transition">Explore Our School</a>
+    <header class="relative h-[50vh] bg-blue-900 flex items-center justify-center text-center">
+        <div class="px-4">
+            <h1 class="text-4xl md:text-7xl font-black text-white mb-4 uppercase">Onwards to Excellence</h1>
+            <p class="text-sm md:text-xl text-white font-light">Nurturing holistic development and academic distinction.</p>
         </div>
     </header>
 
-    <!-- STATS -->
-    <section class="max-w-7xl mx-auto py-12 px-4 -mt-16">
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-            <div class="bg-blue-950 text-white p-8 rounded-lg shadow-xl text-center">
-                <h3 class="text-4xl font-black text-yellow-500">1,429</h3>
-                <p class="uppercase text-sm mt-2">Student Population</p>
+    <!-- CONTENT -->
+    <main class="max-w-7xl mx-auto py-12 px-4 space-y-12 responsive-container">
+        
+        <!-- Stats -->
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 -mt-20">
+            <div class="bg-blue-950 text-white p-6 rounded-lg text-center shadow-xl">
+                <h3 class="text-2xl font-black text-yellow-500">1,429</h3>
+                <p class="text-[10px] uppercase">Students</p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-xl text-center">
-                <h3 class="text-4xl font-black text-blue-900">10</h3>
-                <p class="uppercase text-sm mt-2">Modern Hostels</p>
+            <div class="bg-white p-6 rounded-lg shadow-xl text-center border">
+                <h3 class="text-2xl font-black text-blue-900">10</h3>
+                <p class="text-[10px] uppercase">Modern Hostels</p>
             </div>
-            <div class="bg-white p-8 rounded-lg shadow-xl text-center">
-                <h3 class="text-4xl font-black text-blue-900">1964</h3>
-                <p class="uppercase text-sm mt-2">Year Established</p>
+            <div class="bg-white p-6 rounded-lg shadow-xl text-center border">
+                <h3 class="text-2xl font-black text-blue-900">1964</h3>
+                <p class="text-[10px] uppercase">Established</p>
             </div>
         </div>
-    </section>
 
-    <!-- CONTENT -->
-    <main class="max-w-7xl mx-auto py-12 px-4 space-y-16">
-
-        <!-- Heritage -->
-        <section id="about" class="bg-white p-8 rounded-xl shadow-md border-l-8 border-blue-900">
-            <h2 class="text-3xl font-black text-blue-900 mb-6 border-l-8 border-yellow-500 pl-4">Our Heritage</h2>
-            <p class="text-gray-700 leading-relaxed mb-4">Ikuu Boys High School was established in 1964 as a provincial day secondary school under the sponsorship of the PCEA. The school relocated to its current site in 1965 through land donated by the local community. Our mission is to provide quality secondary education and promote holistic development, fostering academic and moral excellence.</p>
+        <!-- Heritage Section -->
+        <section id="about" class="bg-white p-8 rounded-xl shadow border-l-8 border-blue-900">
+            <h2 class="text-3xl font-black text-blue-900 mb-4">Our Heritage</h2>
+            <p class="text-gray-700 leading-relaxed">Ikuu Boys High School was established in 1964 as a provincial day secondary school under the sponsorship of the PCEA. The school relocated to its current site in 1965 through land donated by the local community.</p>
         </section>
 
-        <!-- Academics & Boarding -->
-        <section id="academics" class="grid md:grid-cols-2 gap-12">
-            <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-yellow-500">
-                <h2 class="text-3xl font-black text-blue-900 mb-4">Boarding & Discipline</h2>
-                <p class="text-gray-700 leading-relaxed">Discipline is a cornerstone of the boarding system. The structured environment allows students to manage time effectively, balancing academic work and rest, while hostel life promotes teamwork and tolerance.</p>
-            </div>
-            <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-yellow-500">
-                <h2 class="text-3xl font-black text-blue-900 mb-4">Languages Department</h2>
-                <p class="text-gray-700 leading-relaxed">Transitioning to the CBC by 2027, the department is evolving into a "Linguistic Centre". We promote critical thinking and ethical reasoning through deep literary analysis and creativity.</p>
+        <!-- Gallery Section -->
+        <section id="gallery" class="space-y-4">
+            <h2 class="text-3xl font-black text-blue-900 mb-6">School Gallery</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <img src="9.8_3.jpg" alt="Academic Target" class="rounded-lg shadow w-full h-60 object-cover">
+                <img src="admin_3.jpg" alt="Administration" class="rounded-lg shadow w-full h-60 object-cover">
+                <img src="bus_3.jpg" alt="School Transport" class="rounded-lg shadow w-full h-60 object-cover">
+                <img src="doc_3.jpg" alt="Staff" class="rounded-lg shadow w-full h-60 object-cover">
+                <img src="ikuu gate_3.jpg" alt="Main Gate" class="rounded-lg shadow w-full h-60 object-cover">
+                <img src="stud_3.jpg" alt="Student Life" class="rounded-lg shadow w-full h-60 object-cover">
+                <img src="students_3.jpg" alt="Assembly" class="rounded-lg shadow w-full h-60 object-cover">
             </div>
         </section>
-
-        <!-- Leadership -->
-        <section id="life" class="bg-blue-900 text-white p-10 rounded-2xl">
-            <h2 class="text-3xl font-black mb-8 text-yellow-500">Leadership Philosophy</h2>
-            <p class="leading-relaxed">Education at Ikuu is strategic, like a game of chess. The "Maroon Spirit" defines our brotherhood, where student leaders are encouraged to nurture renewable energy solutions and refuse to settle for mediocrity.</p>
-        </section>
-
     </main>
 
-    <footer class="bg-blue-950 text-white py-12 text-center">
+    <!-- FOOTER -->
+    <footer class="bg-blue-950 text-white py-8 text-center text-[10px]">
         <p>&copy; 2026 Ikuu Boys High School. Onwards to Excellence.</p>
     </footer>
 
