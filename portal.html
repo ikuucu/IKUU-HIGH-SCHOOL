@@ -4,585 +4,120 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ikuu Boys High School | Secure Portal</title>
-    
     <link rel="manifest" href="manifest.json">
     <link rel="apple-touch-icon" href="logo.png">
-    
-    <!-- Tailwind CSS for modern responsive interfaces -->
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        const supabase = supabase.createClient(
+            'https://immjzkxwspkwmglcxpze.supabase.co',
+            'sb_publishable_doDhQlSZzhYW_pb55Pc6rA_xx4A_AUo'
+        );
+    </script>
 </head>
 <body class="bg-gray-100 font-sans text-gray-800 antialiased">
 
-    <!-- TOP INFO BAR -->
     <div class="bg-blue-950 text-yellow-400 text-[11px] py-1.5 px-4 sticky top-0 z-50 border-b border-blue-900">
         <div class="max-w-7xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-1">
-            <div class="flex items-center gap-4">
-                <span>📍 P.O Box 40 – 60400, Chuka</span>
-                <span class="hidden md:inline">📞 0739902196 / 0715054398</span>
-            </div>
-            <div class="flex items-center gap-4">
-                <span>📧 ikuuboysh@yahoo.co.uk</span>
-                <span class="bg-yellow-400 text-blue-950 px-1.5 py-0.2 rounded font-bold">KNEC Code: 19300010</span>
-            </div>
+            <span>📍 P.O Box 40 – 60400, Chuka | 📧 ikuuboysh@yahoo.co.uk</span>
         </div>
     </div>
 
-    <!-- MAIN HUB NAVIGATION -->
     <nav class="bg-[#1e3a8a] text-white shadow-md sticky top-7 z-40 py-2">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <div class="flex items-center gap-4">
-                    <div class="w-12 h-12 bg-white p-0.5 rounded-full shadow-md flex items-center justify-center overflow-hidden border border-yellow-400 shrink-0">
-                        <img src="logo.png" alt="Ikuu Logo" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                        <div class="hidden w-full h-full bg-blue-200 text-blue-950 font-black text-sm items-center justify-center">IB</div>
-                    </div>
-                    <div>
-                        <h1 class="text-xl sm:text-2xl font-black tracking-wide text-white leading-none uppercase">IKUU BOYS HIGH SCHOOL</h1>
-                        <p class="text-xs sm:text-sm text-yellow-400 font-bold uppercase tracking-wider mt-1" id="portal-title">Secure Portal Access</p>
-                    </div>
-                </div>
-                <div class="flex items-center space-x-4 text-sm font-semibold uppercase">
-                    <a href="index.html" class="hover:text-yellow-400 transition text-xs sm:text-sm text-white/90">Home</a>
-                    <a href="about.html" class="hover:text-yellow-400 transition text-xs sm:text-sm text-white/90">About Us</a>
-                    <button id="logout-btn" onclick="logout()" class="hidden bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-lg transition text-xs font-bold shadow">Sign Out</button>
-                </div>
+        <div class="max-w-7xl mx-auto px-4 flex items-center justify-between h-16">
+            <h1 class="text-xl font-black uppercase">IKUU BOYS PORTAL</h1>
+            <div class="flex items-center space-x-4 font-bold uppercase text-xs">
+                <a href="index.html" class="hover:text-yellow-400">🏠 Home</a>
+                <button id="logout-btn" onclick="logout()" class="hidden bg-red-600 px-3 py-1 rounded">Sign Out</button>
             </div>
         </div>
     </nav>
 
-    <!-- CONTENT WRAPPER -->
     <div class="max-w-7xl mx-auto px-4 py-10">
-
-        <!-- AUTH GATEWAY HUB (LOGIN & REGISTER PANEL) -->
-        <div id="auth-gateway" class="max-w-md mx-auto bg-white rounded-2xl shadow-xl border overflow-hidden mt-6">
-            <div class="bg-gradient-to-b from-blue-950 to-blue-900 p-8 text-center border-b border-blue-800">
-                <div class="w-24 h-24 bg-white p-2 rounded-2xl shadow-inner mx-auto mb-4 flex items-center justify-center overflow-hidden border border-yellow-400/50">
-                    <img src="logo.png" alt="Ikuu Crest" class="w-full h-full object-contain" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-                    <div class="hidden w-full h-full bg-blue-100 text-blue-900 font-black text-2xl rounded-xl items-center justify-center uppercase">IBHS</div>
-                </div>
-                <h2 class="text-xl font-extrabold text-white tracking-wide">Ikuu Boys High School</h2>
-                <p class="text-xs text-blue-200 mt-1">Digital Student & Faculty Portal Terminal</p>
-            </div>
-
-            <div class="flex border-b bg-gray-50 text-center font-bold text-sm text-gray-500">
-                <button id="tab-login" onclick="switchAuthTab('login')" class="w-1/2 py-4 text-blue-900 border-b-2 border-blue-900 bg-white">Sign In</button>
-                <button id="tab-signup" onclick="switchAuthTab('signup')" class="w-1/2 py-4 hover:bg-gray-100">Create Account</button>
-            </div>
-
-            <div class="p-8">
-                <div id="auth-message" class="hidden mb-4 p-3 rounded text-sm text-center font-semibold"></div>
-
-                <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Role / Account Type</label>
-                        <select id="login-role" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-900 outline-none">
-                            <option value="student">Student Portal</option>
-                            <option value="teacher">Subject Teacher Panel</option>
-                            <option value="admin">Administrator Panel</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">ID Code / Admission No / Email</label>
-                        <input type="text" id="login-id" required placeholder="e.g., 1001, T101, or admin" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-900 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Password</label>
-                        <input type="password" id="login-pass" required placeholder="••••••••" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-900 outline-none">
-                    </div>
-                    <button type="submit" class="w-full bg-blue-900 hover:bg-blue-950 text-white font-bold py-3 rounded-lg transition shadow">Access Account</button>
-                </form>
-
-                <form id="signup-form" onsubmit="handleSignup(event)" class="space-y-4 hidden">
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Select Registration Role</label>
-                        <select id="signup-role" onchange="toggleSignupLabels()" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-900 outline-none">
-                            <option value="student">Student Profile</option>
-                            <option value="teacher">Subject Teacher Profile</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Full Name</label>
-                        <input type="text" id="signup-name" required placeholder="e.g., Mr. David Cheruiyot or John Doe" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-900 outline-none">
-                    </div>
-                    <div>
-                        <label id="signup-id-label" class="block text-xs font-bold uppercase text-gray-600 mb-1">Admission Number</label>
-                        <input type="text" id="signup-id" required placeholder="Enter ID (e.g., 1003)" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-900 outline-none">
-                    </div>
-                    <div>
-                        <label class="block text-xs font-bold uppercase text-gray-600 mb-1">Create Password</label>
-                        <input type="password" id="signup-pass" required placeholder="••••••••" class="w-full p-3 bg-gray-50 border rounded-lg focus:ring-2 focus:ring-blue-900 outline-none">
-                    </div>
-                    <button type="submit" class="w-full bg-yellow-500 hover:bg-yellow-600 text-blue-950 font-bold py-3 rounded-lg transition shadow">Register Profile</button>
-                </form>
-            </div>
+        
+        <div id="auth-gateway" class="max-w-md mx-auto bg-white rounded-2xl shadow-xl p-8 border">
+            <h2 class="text-xl font-extrabold text-center mb-6">Secure Portal Access</h2>
+            <form id="login-form" onsubmit="handleLogin(event)" class="space-y-4">
+                <select id="login-role" class="w-full p-3 bg-gray-50 border rounded-lg">
+                    <option value="student">Student Portal</option>
+                    <option value="teacher">Teacher Panel</option>
+                    <option value="admin">Admin Panel</option>
+                </select>
+                <input type="text" id="login-id" placeholder="Admission / ID" required class="w-full p-3 bg-gray-50 border rounded-lg">
+                <input type="password" id="login-pass" placeholder="Password" required class="w-full p-3 bg-gray-50 border rounded-lg">
+                <button type="submit" class="w-full bg-blue-900 text-white font-bold py-3 rounded-lg">Access Account</button>
+            </form>
         </div>
 
-        <!-- STUDENT DASHBOARD -->
         <div id="student-dashboard" class="hidden space-y-8">
-            <header class="bg-gradient-to-r from-blue-950 to-blue-900 text-white py-10 px-6 rounded-2xl shadow-md relative overflow-hidden">
-                <div class="absolute right-0 bottom-0 opacity-10 pointer-events-none transform translate-y-4 translate-x-4">
-                    <span class="text-7xl font-black">STUDENT</span>
-                </div>
-                <div class="relative z-10 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
-                    <div>
-                        <h2 class="text-3xl font-black mb-1">Welcome back, <span id="student-user-name">Titan</span>!</h2>
-                        <p class="text-blue-200 text-sm">Admission Number: <span id="student-user-id" class="font-mono bg-blue-900 px-2 py-0.5 rounded text-yellow-400">0000</span></p>
-                    </div>
-                    <!-- Target Metrics Header Badge -->
-                    <div class="flex gap-2 text-center text-white">
-                        <div class="bg-white/10 backdrop-blur-xs px-3 py-1.5 rounded-xl border border-white/10 text-xs">
-                            <span class="block font-black text-yellow-400">9.8+ MEAN</span>
-                            <span class="text-[9px] text-blue-200 uppercase tracking-wider">KCSE Target</span>
-                        </div>
-                    </div>
-                </div>
-            </header>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="lg:col-span-2 space-y-8">
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-bold text-blue-950 mb-4 border-b pb-2 flex items-center gap-2">
-                            📊 Academic Results Report
-                        </h3>
-                        <div id="student-results-list" class="space-y-3"></div>
-                    </div>
-                    <div class="bg-white p-6 rounded-2xl shadow-sm border border-gray-200">
-                        <h3 class="text-xl font-bold text-blue-950 mb-4 border-b pb-2 flex items-center gap-2">
-                            📚 Coursework Materials & Assignments
-                        </h3>
-                        <div id="student-assignment-list" class="space-y-4"></div>
-                    </div>
-                </div>
-                <div class="bg-blue-950 text-white p-6 rounded-2xl shadow-md h-fit">
-                    <h3 class="text-lg font-bold text-yellow-400 mb-4 border-b border-blue-900 pb-2">📢 Broadcast Notice Board</h3>
-                    <ul class="space-y-4 text-sm text-gray-300">
-                        <li>• Complete your term projects before week 6 audits begin.</li>
-                        <li>• Science Congress contestants report to Room 4 at 4 PM.</li>
-                    </ul>
-                </div>
-            </div>
+            <h2 class="text-3xl font-black">Welcome, <span id="student-user-name"></span></h2>
+            <div id="student-results-list" class="space-y-4"></div>
         </div>
 
-        <!-- TEACHER DASHBOARD -->
         <div id="teacher-dashboard" class="hidden space-y-8">
-            <header class="bg-gradient-to-r from-emerald-950 to-emerald-900 text-white py-10 px-6 rounded-2xl shadow-md border-b-4 border-yellow-400">
-                <span class="bg-yellow-400 text-emerald-950 font-bold text-xs px-2.5 py-0.5 rounded uppercase font-mono">Faculty Desk</span>
-                <h2 class="text-3xl font-black mt-1">Instructor Performance Logging Hub</h2>
-                <p class="text-emerald-200 text-sm mt-1">Logged Teacher: <span id="teacher-profile-name" class="font-bold text-white">Instructor</span></p>
-            </header>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <div class="bg-white p-6 rounded-2xl shadow-sm border lg:col-span-1 space-y-6">
-                    <div>
-                        <h3 class="text-lg font-bold text-emerald-900 mb-3 border-b pb-1">Log Student Scores</h3>
-                        <form onsubmit="handleTeacherUpload(event)" class="space-y-4 text-sm">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Target Student (Admission No)</label>
-                                <select id="teacher-target-student" required class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none"></select>
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Subject Course Title</label>
-                                <input type="text" id="teacher-subject-title" required placeholder="Mathematics, Physics" class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Performance Metrics</label>
-                                <input type="text" id="teacher-student-score" required placeholder="Grade Awarded: A (89%)" class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none">
-                            </div>
-                            <button type="submit" class="w-full bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-2.5 rounded-lg transition uppercase tracking-wider text-xs">Commit & Publish Score</button>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="bg-white p-6 rounded-2xl shadow-sm border lg:col-span-2">
-                    <h3 class="text-lg font-bold text-slate-900 mb-4 border-b pb-2">Complete Class Roll Call</h3>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm">
-                            <thead>
-                                <tr class="bg-gray-100 text-gray-600 font-bold text-xs uppercase">
-                                    <th class="p-3">Student Name</th>
-                                    <th class="p-3">Admission ID</th>
-                                </tr>
-                            </thead>
-                            <tbody id="teacher-student-table" class="divide-y text-gray-700"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <h2 class="text-3xl font-black text-emerald-800">Teacher Workspace</h2>
+            <table class="w-full bg-white rounded-lg shadow p-4">
+                <thead><tr class="text-left bg-gray-100"><th class="p-3">Name</th><th class="p-3">Admission No</th></tr></thead>
+                <tbody id="teacher-student-table"></tbody>
+            </table>
         </div>
 
-        <!-- ADMINISTRATOR DASHBOARD -->
         <div id="admin-dashboard" class="hidden space-y-8">
-            <header class="bg-slate-900 text-white py-8 px-6 rounded-2xl shadow-md border-b-4 border-yellow-400">
-                <span class="bg-red-500 text-white font-bold text-xs px-2.5 py-0.5 rounded uppercase font-mono">Administrative Registry</span>
-                <h2 class="text-3xl font-black mt-1">Management Control Terminal</h2>
-            </header>
-
-            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                <!-- LEFT PANEL: UPLOAD DATA & MULTIMEDIA ENGINE -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border lg:col-span-1 space-y-6">
-                    <div>
-                        <h3 class="text-lg font-bold text-slate-900 mb-3 border-b pb-1">📤 Content Deployment Engine</h3>
-                        <div class="mb-4">
-                            <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Resource Category Type</label>
-                            <select id="upload-type" onchange="toggleFormInputs()" class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none">
-                                <option value="assignment">📄 Assignment Task Document</option>
-                                <option value="video">🎬 Video Lecture Capture</option>
-                                <option value="result">📊 Exam Results Sheet</option>
-                            </select>
-                        </div>
-
-                        <form onsubmit="handleAdminUpload(event)" class="space-y-4 text-sm">
-                            <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Target Audience Scope</label>
-                                <select id="upload-target-scope" onchange="toggleTargetInput()" class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none">
-                                    <option value="all">Everyone (All Cohorts)</option>
-                                    <option value="single">Single Individual Student</option>
-                                </select>
-                            </div>
-                            <div id="target-id-wrapper" class="hidden">
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Student Admission Number</label>
-                                <input type="text" id="upload-target-id" placeholder="e.g. 1001" class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none border-orange-400 focus:ring-2 focus:ring-orange-400">
-                            </div>
-                            <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Resource Header / Topic Title</label>
-                                <input type="text" id="upload-title" required placeholder="e.g., Chemistry Volumetric Analysis" class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none">
-                            </div>
-                            <div>
-                                <label id="dynamic-body-label" class="block text-xs font-bold text-gray-500 uppercase mb-1">Instructions / Description</label>
-                                <textarea id="upload-body" required rows="3" placeholder="Provide task assignment directions for students here..." class="w-full p-2.5 bg-gray-50 border rounded-lg outline-none"></textarea>
-                            </div>
-                            
-                            <!-- FILE CHANNELS PICKER -->
-                            <div>
-                                <label class="block text-xs font-bold text-gray-500 uppercase mb-1">Attach File Payload (Optional)</label>
-                                <div class="border border-dashed border-gray-300 hover:border-blue-900 rounded-lg h-11 flex items-center justify-center bg-gray-50 hover:bg-blue-50/20 transition cursor-pointer relative px-3">
-                                    <input type="file" id="upload-file" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer">
-                                    <span class="text-xs text-gray-600 font-medium truncate">📂 Click to attach document or mp4</span>
-                                </div>
-                            </div>
-
-                            <button type="submit" class="w-full bg-blue-900 hover:bg-blue-950 text-white font-bold py-2.5 rounded-lg transition uppercase tracking-wider text-xs shadow-md">Deploy to Portal Stream</button>
-                        </form>
-                    </div>
-                </div>
-
-                <!-- RIGHT PANEL: ACCOUNT DIRECTORY & ACCOUNT REMOVAL TERMINAL -->
-                <div class="bg-white p-6 rounded-2xl shadow-sm border lg:col-span-2">
-                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4 border-b pb-2">
-                        <h3 class="text-lg font-bold text-slate-900">👥 System Account Registry Logs</h3>
-                        <p class="text-[11px] text-rose-600 font-medium italic">⚠️ Account removals take effect instantly</p>
-                    </div>
-                    <div class="overflow-x-auto">
-                        <table class="w-full text-left text-sm">
-                            <thead>
-                                <tr class="bg-gray-100 text-gray-600 font-bold text-xs uppercase">
-                                    <th class="p-3">Profile Identity</th>
-                                    <th class="p-3">Identification ID</th>
-                                    <th class="p-3">Role Status</th>
-                                    <th class="p-3 text-right">System Management</th>
-                                </tr>
-                            </thead>
-                            <tbody id="admin-user-table" class="divide-y text-gray-700"></tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
+            <h2 class="text-3xl font-black text-red-800">Admin Control Terminal</h2>
+            <table class="w-full bg-white rounded-lg shadow p-4">
+                <tbody id="admin-user-table"></tbody>
+            </table>
         </div>
-
     </div>
 
-    <!-- HUB FOOTER -->
-    <footer class="bg-blue-950 text-gray-400 py-6 text-center text-xs mt-auto border-t border-blue-900">
-        <div class="max-w-7xl mx-auto px-4">
-            &copy; 2026 Ikuu Boys High School Portal Network Management Node. All configuration updates monitored dynamically.
-        </div>
-    </footer>
-
     <script>
-        let userDatabase = [
-            { id: "admin", name: "Principal's Office / Registry Staff", pass: "admin123", role: "admin" },
-            { id: "T101", name: "Mr. Antony Kipkorir (HOD Sciences)", pass: "teacher123", role: "teacher" },
-            { id: "1001", name: "Kiprotich Emmanuel", pass: "student123", role: "student" },
-            { id: "1002", name: "Mwangi James", pass: "student123", role: "student" }
-        ];
-
-        let sharedAssignments = [
-            { target: "all", type: "assignment", title: "Mathematics: Calculus Assessment Pack", desc: "Submit directly to department desks prior to morning assembly." },
-            { target: "1001", type: "assignment", title: "Chemistry: Remedial Practical Homework", desc: "Complete the extra volumetric analysis worksheets handed out during afternoon cleanup." }
-        ];
-
-        let sharedResults = [
-            { target: "all", title: "Term 1 Opener Exam Overview", score: "Class Average Performance: Mean Grade B (8.45)" },
-            { target: "1001", title: "Term 1 Chemistry Opener Test", score: "Grade Awarded: A (84%) - Excellent progress." },
-            { target: "1002", title: "Term 1 Chemistry Opener Test", score: "Grade Awarded: B+ (72%) - Strong showing." }
-        ];
-
-        let currentlyLoggedInUser = null;
-
-        function toggleSignupLabels() {
-            const signupRole = document.getElementById('signup-role').value;
-            const label = document.getElementById('signup-id-label');
-            const field = document.getElementById('signup-id');
-            if(signupRole === 'teacher') {
-                label.textContent = "Teacher Registration Code";
-                field.placeholder = "e.g., T103";
-            } else {
-                label.textContent = "Admission Number";
-                field.placeholder = "Enter ID (e.g., 1003)";
-            }
-        }
-
-        function toggleTargetInput() {
-            const scope = document.getElementById('upload-target-scope').value;
-            const targetWrapper = document.getElementById('target-id-wrapper');
-            if (scope === 'single') {
-                targetWrapper.classList.remove('hidden');
-                document.getElementById('upload-target-id').required = true;
-            } else {
-                targetWrapper.classList.add('hidden');
-                document.getElementById('upload-target-id').required = false;
-            }
-        }
-
-        function toggleFormInputs() {
-            const type = document.getElementById('upload-type').value;
-            const bodyLabel = document.getElementById('dynamic-body-label');
-            const bodyTextArea = document.getElementById('upload-body');
-            if (type === 'result') {
-                bodyLabel.textContent = "Exam Score Grades / Text Performance Analysis";
-                bodyTextArea.placeholder = "Grade Awarded: A- (78%)";
-            } else if (type === 'video') {
-                bodyLabel.textContent = "Video Description & Lecture Context";
-                bodyTextArea.placeholder = "Enter key reference timestamps or curriculum parameters for the streaming video content...";
-            } else {
-                bodyLabel.textContent = "Instructions / Description";
-                bodyTextArea.placeholder = "Provide task assignment directions for students here...";
-            }
-        }
-
-        function switchAuthTab(targetTab) {
-            const tabLogin = document.getElementById('tab-login');
-            const tabSignup = document.getElementById('tab-signup');
-            const formLogin = document.getElementById('login-form');
-            const formSignup = document.getElementById('signup-form');
-            if(targetTab === 'login') {
-                tabLogin.className = "w-1/2 py-4 text-blue-900 border-b-2 border-blue-900 bg-white font-bold text-sm";
-                tabSignup.className = "w-1/2 py-4 hover:bg-gray-100 text-gray-500 text-sm";
-                formLogin.classList.remove('hidden');
-                formSignup.classList.add('hidden');
-            } else {
-                tabSignup.className = "w-1/2 py-4 text-blue-900 border-b-2 border-blue-900 bg-white font-bold text-sm";
-                tabLogin.className = "w-1/2 py-4 hover:bg-gray-100 text-gray-500 text-sm";
-                formSignup.classList.remove('hidden');
-                formLogin.classList.add('hidden');
-            }
-            document.getElementById('auth-message').classList.add('hidden');
-        }
-
-        function handleSignup(event) {
+        async function handleLogin(event) {
             event.preventDefault();
-            const role = document.getElementById('signup-role').value;
-            const name = document.getElementById('signup-name').value;
-            const customId = document.getElementById('signup-id').value.trim();
-            const pass = document.getElementById('signup-pass').value;
-            const msgBox = document.getElementById('auth-message');
-
-            if(userDatabase.find(u => u.id === customId)) {
-                msgBox.className = "mb-4 p-3 rounded text-sm text-center font-semibold bg-red-100 text-red-800";
-                msgBox.textContent = "Error: Registration ID already registered.";
-                msgBox.classList.remove('hidden');
-                return;
-            }
-
-            userDatabase.push({ id: customId, name: name, pass: pass, role: role });
-            msgBox.className = "mb-4 p-3 rounded text-sm text-center font-semibold bg-green-100 text-green-800";
-            msgBox.textContent = "Success! Account configured. Click Sign In tab.";
-            msgBox.classList.remove('hidden');
-            document.getElementById('signup-form').reset();
-            toggleSignupLabels();
-        }
-
-        function handleLogin(event) {
-            event.preventDefault();
+            const id = document.getElementById('login-id').value;
+            const pass = document.getElementById('login-pass').value;
             const role = document.getElementById('login-role').value;
-            const enteredId = document.getElementById('login-id').value.trim();
-            const enteredPass = document.getElementById('login-pass').value;
-            const msgBox = document.getElementById('auth-message');
 
-            const matchedUser = userDatabase.find(user => user.id === enteredId && user.pass === enteredPass && user.role === role);
+            const { data, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('admission_no', id)
+                .eq('pass', pass)
+                .eq('role', role)
+                .single();
 
-            if(matchedUser) {
-                currentlyLoggedInUser = matchedUser;
+            if (data) {
                 document.getElementById('auth-gateway').classList.add('hidden');
                 document.getElementById('logout-btn').classList.remove('hidden');
-
-                if(role === 'admin') {
-                    document.getElementById('portal-title').textContent = "Admin Control Suite";
-                    document.getElementById('admin-dashboard').classList.remove('hidden');
-                    renderAdminTable();
-                } else if(role === 'teacher') {
-                    document.getElementById('portal-title').textContent = "Teacher Workspace Panel";
-                    document.getElementById('teacher-profile-name').textContent = matchedUser.name;
+                if (role === 'teacher') {
                     document.getElementById('teacher-dashboard').classList.remove('hidden');
                     renderTeacherWorkspace();
-                } else {
-                    document.getElementById('portal-title').textContent = "Student Workspace";
-                    document.getElementById('student-user-name').textContent = matchedUser.name;
-                    document.getElementById('student-user-id').textContent = matchedUser.id;
+                } else if (role === 'student') {
                     document.getElementById('student-dashboard').classList.remove('hidden');
-                    renderStudentView();
+                    document.getElementById('student-user-name').textContent = data.name;
+                } else if (role === 'admin') {
+                    document.getElementById('admin-dashboard').classList.remove('hidden');
+                    renderAdminTable();
                 }
             } else {
-                msgBox.className = "mb-4 p-3 rounded text-sm text-center font-semibold bg-red-100 text-red-800";
-                msgBox.textContent = "Invalid credential configuration mismatch.";
-                msgBox.classList.remove('hidden');
+                alert("Authentication failed.");
             }
         }
 
-        function renderTeacherWorkspace() {
-            const studentSelector = document.getElementById('teacher-target-student');
-            const studentTableBody = document.getElementById('teacher-student-table');
-            studentSelector.innerHTML = "";
-            studentTableBody.innerHTML = "";
-            const studentList = userDatabase.filter(u => u.role === 'student');
-            studentList.forEach(student => {
-                studentSelector.innerHTML += `<option value="${student.id}">${student.name} (${student.id})</option>`;
-                studentTableBody.innerHTML += `
-                    <tr class="hover:bg-gray-50 text-sm">
-                        <td class="p-3 font-semibold text-slate-900">${student.name}</td>
-                        <td class="p-3 font-mono text-gray-600">${student.id}</td>
-                    </tr>
-                `;
-            });
+        async function renderTeacherWorkspace() {
+            const { data: students } = await supabase.from('profiles').select('*').eq('role', 'student');
+            document.getElementById('teacher-student-table').innerHTML = students.map(s => `
+                <tr class="border-b"><td class="p-3">${s.name}</td><td class="p-3 font-mono">${s.admission_no}</td></tr>
+            `).join('');
         }
 
-        function handleTeacherUpload(event) {
-            event.preventDefault();
-            const targetStudentId = document.getElementById('teacher-target-student').value;
-            const subjectTitle = document.getElementById('teacher-subject-title').value;
-            const textScore = document.getElementById('teacher-student-score').value;
-            sharedResults.unshift({ target: targetStudentId, title: subjectTitle, score: textScore });
-            alert(`Results committed successfully to ID: ${targetStudentId}`);
-            document.getElementById('teacher-subject-title').value = "";
-            document.getElementById('teacher-student-score').value = "";
+        async function renderAdminTable() {
+            const { data: users } = await supabase.from('profiles').select('*');
+            document.getElementById('admin-user-table').innerHTML = users.map(u => `
+                <tr class="border-b"><td class="p-3">${u.name}</td><td class="p-3">${u.role}</td></tr>
+            `).join('');
         }
 
-        function handleAdminUpload(event) {
-            event.preventDefault();
-            const uploadType = document.getElementById('upload-type').value;
-            const targetScope = document.getElementById('upload-target-scope').value;
-            const targetId = targetScope === 'all' ? 'all' : document.getElementById('upload-target-id').value.trim();
-            const title = document.getElementById('upload-title').value;
-            const textContent = document.getElementById('upload-body').value;
-
-            if (targetScope === 'single' && !userDatabase.find(u => u.id === targetId && u.role === 'student')) {
-                alert(`Error: Admission code "${targetId}" not found inside roster logs.`);
-                return;
-            }
-            
-            if (uploadType === 'assignment' || uploadType === 'video') {
-                sharedAssignments.unshift({ target: targetId, type: uploadType, title: title, desc: textContent });
-                alert(`${uploadType.charAt(0).toUpperCase() + uploadType.slice(1)} asset deployed securely to target feeds.`);
-            } else {
-                sharedResults.unshift({ target: targetId, title: title, score: textContent });
-                alert("Exam log scores published successfully.");
-            }
-            
-            document.getElementById('upload-title').value = "";
-            document.getElementById('upload-body').value = "";
-            if (document.getElementById('upload-target-id')) document.getElementById('upload-target-id').value = "";
-            document.getElementById('upload-file').value = "";
-        }
-
-        function renderStudentView() {
-            const currentStudentId = currentlyLoggedInUser.id;
-            const resultsContainer = document.getElementById('student-results-list');
-            resultsContainer.innerHTML = "";
-            const filteredResults = sharedResults.filter(r => r.target === 'all' || r.target === currentStudentId);
-            if (filteredResults.length === 0) {
-                resultsContainer.innerHTML = `<p class="text-xs text-gray-400 italic">No terminal metric files matching your credential index.</p>`;
-            } else {
-                filteredResults.forEach(res => {
-                    const isPersonal = res.target !== 'all';
-                    resultsContainer.innerHTML += `
-                        <div class="p-3 rounded-xl border flex flex-col sm:flex-row sm:items-center justify-between gap-2 ${isPersonal ? 'bg-green-50 border-green-300' : 'bg-gray-50'}">
-                            <div>
-                                <span class="text-[10px] uppercase font-bold tracking-wider ${isPersonal ? 'text-green-700' : 'text-gray-500'}">
-                                    ${isPersonal ? '🔒 Personal Record' : '📢 Shared Roster Log'}
-                                </span>
-                                <h4 class="font-bold text-sm text-blue-950">${res.title}</h4>
-                            </div>
-                            <span class="font-mono text-sm font-extrabold ${isPersonal ? 'text-green-800' : 'text-blue-900'}">${res.score}</span>
-                        </div>
-                    `;
-                });
-            }
-
-            const assignmentContainer = document.getElementById('student-assignment-list');
-            assignmentContainer.innerHTML = "";
-            const filteredAssignments = sharedAssignments.filter(a => a.target === 'all' || a.target === currentStudentId);
-            if (filteredAssignments.length === 0) {
-                assignmentContainer.innerHTML = `<p class="text-xs text-gray-400 italic">No curriculum material or homework updates posted.</p>`;
-            } else {
-                filteredAssignments.forEach(task => {
-                    const isPersonal = task.target !== 'all';
-                    const isVideo = task.type === 'video';
-                    assignmentContainer.innerHTML += `
-                        <div class="p-4 rounded-xl border-l-4 ${isVideo ? 'bg-purple-50 border-purple-600' : isPersonal ? 'bg-orange-50 border-orange-500' : 'bg-gray-50 border-blue-900'}">
-                            <span class="text-[10px] uppercase font-bold tracking-wider block mb-1 ${isVideo ? 'text-purple-700' : isPersonal ? 'text-orange-700' : 'text-blue-900'}">
-                                ${isVideo ? '🎬 Video Lecture Capture' : isPersonal ? '🔒 Direct Profile Task' : '📢 General Requirement'}
-                            </span>
-                            <h4 class="font-bold text-base text-blue-950">${task.title}</h4>
-                            <p class="text-xs text-gray-600 mt-1">${task.desc}</p>
-                            ${isVideo ? `<div class="mt-3 bg-slate-900 text-slate-400 text-xs aspect-video rounded-lg flex items-center justify-center border border-slate-800">📺 Localized Media Playback Simulator Engine</div>` : ''}
-                        </div>
-                    `;
-                });
-            }
-        }
-
-        function renderAdminTable() {
-            const tableBody = document.getElementById('admin-user-table');
-            tableBody.innerHTML = "";
-            userDatabase.forEach(user => {
-                // Administrators shouldn't accidentally click and delete themselves out of the layout session state
-                const deleteBtnHtml = user.id === 'admin' ? 
-                    `<span class="text-gray-400 text-xs italic font-medium">System Protected</span>` : 
-                    `<button onclick="deleteUserProfile('${user.id}')" class="bg-rose-50 hover:bg-rose-600 text-rose-600 hover:text-white px-2.5 py-1 rounded border border-rose-200 text-xs font-bold transition">Delete Profile</button>`;
-
-                tableBody.innerHTML += `
-                    <tr class="hover:bg-gray-50 text-xs sm:text-sm transition">
-                        <td class="p-3 font-semibold text-slate-900">${user.name}</td>
-                        <td class="p-3 font-mono text-gray-600">${user.id}</td>
-                        <td class="p-3"><span class="px-2 py-0.5 rounded text-[10px] font-bold ${user.role === 'admin' ? 'bg-red-100 text-red-800' : user.role === 'teacher' ? 'bg-emerald-100 text-emerald-800' : 'bg-blue-100 text-blue-800'}">${user.role.toUpperCase()}</span></td>
-                        <td class="p-3 text-right">${deleteBtnHtml}</td>
-                    </tr>
-                `;
-            });
-        }
-
-        function deleteUserProfile(userId) {
-            if(confirm(`Are you certain you want to remove the profile matching identification: [ ${userId} ] permanently from active portal arrays?`)) {
-                userDatabase = userDatabase.filter(u => u.id !== userId);
-                renderAdminTable();
-            }
-        }
-
-        if ('serviceWorker' in navigator) {
-            navigator.serviceWorker.register('data:text/javascript,self.addEventListener("fetch",()=>{} );', {scope: './'});
-        }
-
-        function logout() {
-            currentlyLoggedInUser = null;
-            document.getElementById('logout-btn').classList.add('hidden');
-            document.getElementById('student-dashboard').classList.add('hidden');
-            document.getElementById('teacher-dashboard').classList.add('hidden');
-            document.getElementById('admin-dashboard').classList.add('hidden');
-            document.getElementById('auth-gateway').classList.remove('hidden');
-            document.getElementById('portal-title').textContent = "Secure Portal Access";
-            document.getElementById('login-form').reset();
-            document.getElementById('auth-message').classList.add('hidden');
-        }
+        function logout() { location.reload(); }
     </script>
 </body>
 </html>
