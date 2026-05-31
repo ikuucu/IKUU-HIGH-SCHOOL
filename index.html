@@ -5,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ikuu Boys High School | Official Website</title>
     
+    <!-- App & Icon Metadata -->
     <link rel="icon" href="logo.png" type="image/png">
     <link rel="apple-touch-icon" href="logo.png">
     <link rel="manifest" href="manifest.json">
     <meta name="mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-touch-app-capable" content="yes">
     
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
@@ -23,79 +24,81 @@
         </div>
     </div>
 
-    <!-- MAIN NAV -->
-    <nav class="bg-white shadow-lg sticky top-0 z-50 py-4 border-b-4 border-yellow-500">
+    <!-- NAVIGATION -->
+    <nav class="sticky top-0 bg-white shadow-md z-50 py-4 border-b-4 border-yellow-500">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-3">
                 <img src="logo.png" alt="Logo" class="w-10 h-10 object-contain">
-                <h1 class="font-black text-2xl uppercase text-blue-900">Ikuu Boys High School</h1>
+                <h1 class="text-2xl font-black text-blue-900 uppercase">Ikuu Boys</h1>
             </div>
-            <div class="space-x-8 font-bold text-sm uppercase text-blue-900">
-                <a href="index.html" class="hover:text-yellow-600">Home</a>
-                <a href="departments.html" class="hover:text-yellow-600">Departments</a>
+            <div class="hidden md:flex space-x-8 font-bold text-blue-900 uppercase text-sm">
                 <a href="#about" class="hover:text-yellow-600">Our Story</a>
-                <a href="portal.html" class="bg-blue-900 text-white px-6 py-2 rounded hover:bg-blue-800 transition">Portal Login</a>
+                <a href="#academics" class="hover:text-yellow-600">Academics</a>
+                <a href="#life" class="hover:text-yellow-600">Campus Life</a>
+                <a href="portal.html" class="bg-yellow-500 px-5 py-2 rounded text-blue-950 hover:bg-yellow-400 transition">Portal</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO SECTION -->
-    <header class="relative w-full h-[550px]">
-        <img src="ikuu gate_2.jpg" class="w-full h-full object-cover" alt="School Gate">
-        <div class="absolute inset-0 bg-blue-900/70 flex items-center justify-center">
-            <div class="text-center text-white px-4">
-                <h2 class="text-6xl font-black mb-4 uppercase">Onwards to Excellence</h2>
-                <p class="text-2xl mb-8 font-light">Nurturing holistic development and academic distinction.</p>
-                <a href="portal.html" class="bg-yellow-500 text-blue-950 px-10 py-4 rounded font-black uppercase hover:bg-yellow-400">Enter Student Portal</a>
-            </div>
+    <!-- HERO -->
+    <header class="relative h-[60vh] bg-blue-900 flex items-center justify-center text-center">
+        <div class="absolute inset-0 bg-blue-900/70"></div>
+        <div class="relative z-10 text-white px-4">
+            <h1 class="text-5xl md:text-7xl font-black mb-6 uppercase">Onwards to Excellence</h1>
+            <p class="text-xl mb-8 font-light">Nurturing holistic development and academic distinction.</p>
+            <a href="#about" class="bg-white text-blue-900 px-8 py-4 font-bold rounded-lg hover:bg-gray-100 uppercase transition">Explore Our School</a>
         </div>
     </header>
 
-    <!-- COMPREHENSIVE INFO SECTION -->
-    <section class="max-w-7xl mx-auto py-20 px-4 space-y-16">
-        
-        <!-- Boarding & Health -->
-        <div class="grid md:grid-cols-2 gap-12">
-            <div class="space-y-6">
-                <h2 class="text-3xl font-black text-blue-900 border-l-8 border-yellow-500 pl-4">Boarding & Welfare</h2>
-                <p class="text-gray-700">The boarding department supports 1,429 students across 10 modern hostels, each managed by a dedicated hostel master.</p>
-                <ul class="list-disc pl-5 space-y-2 text-gray-700">
-                    <li>The school provides a nutritious, balanced diet including various proteins and fresh fruits.</li>
-                    <li>Health and safety are top priorities, supported by a 24/7 clinic and a qualified clinician.</li>
-                    <li>Reliable referral systems are in place with Chuka General, Optimal Family, and Komarock hospitals.</li>
-                </ul>
+    <!-- STATS -->
+    <section class="max-w-7xl mx-auto py-12 px-4 -mt-16">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="bg-blue-950 text-white p-8 rounded-lg shadow-xl text-center">
+                <h3 class="text-4xl font-black text-yellow-500">1,429</h3>
+                <p class="uppercase text-sm mt-2">Student Population</p>
             </div>
-            
-            <!-- Academic Support -->
-            <div class="space-y-6">
-                <h2 class="text-3xl font-black text-blue-900 border-l-8 border-yellow-500 pl-4">Academic Excellence</h2>
-                <p class="text-gray-700">Academic support is closely integrated into boarding life, where masters monitor student progress and provide guidance to ensure they remain focused.</p>
-                <p class="text-gray-700">The Languages Department is leading the transition from the 8-4-4 system to the Competency-Based Curriculum (CBC), emphasizing critical thinking, communication, and 21st-century values, with a full phase-out target of 2027.</p>
+            <div class="bg-white p-8 rounded-lg shadow-xl text-center">
+                <h3 class="text-4xl font-black text-blue-900">10</h3>
+                <p class="uppercase text-sm mt-2">Modern Hostels</p>
             </div>
-        </div>
-
-        <!-- Leadership -->
-        <div class="bg-blue-900 text-white p-10 rounded-2xl">
-            <h2 class="text-3xl font-black mb-8 text-yellow-500">Student Leadership</h2>
-            <div class="grid md:grid-cols-2 gap-8">
-                <div>
-                    <h3 class="font-bold text-xl mb-2">School Captain</h3>
-                    <p>Promotes the "Maroon Spirit" and describes the school as a "Powerhouse" of excellence that fosters a deep sense of brotherhood.</p>
-                </div>
-                <div>
-                    <h3 class="font-bold text-xl mb-2">Deputy School Captain</h3>
-                    <p>Views education as a strategic pursuit—similar to a chessboard—where success is achieved through deliberate, sustained effort.</p>
-                </div>
+            <div class="bg-white p-8 rounded-lg shadow-xl text-center">
+                <h3 class="text-4xl font-black text-blue-900">1964</h3>
+                <p class="uppercase text-sm mt-2">Year Established</p>
             </div>
         </div>
     </section>
 
-    <!-- FOOTER -->
-    <footer class="bg-blue-950 text-white py-16 px-4">
-        <div class="max-w-7xl mx-auto text-center">
-            <h4 class="font-black text-2xl mb-4">IKUU BOYS HIGH SCHOOL</h4>
-            <p class="text-blue-300 text-sm">© 2026 Official Website. Onwards to Excellence.</p>
-        </div>
+    <!-- CONTENT -->
+    <main class="max-w-7xl mx-auto py-12 px-4 space-y-16">
+
+        <!-- Heritage -->
+        <section id="about" class="bg-white p-8 rounded-xl shadow-md border-l-8 border-blue-900">
+            <h2 class="text-3xl font-black text-blue-900 mb-6 border-l-8 border-yellow-500 pl-4">Our Heritage</h2>
+            <p class="text-gray-700 leading-relaxed mb-4">Ikuu Boys High School was established in 1964 as a provincial day secondary school under the sponsorship of the PCEA. The school relocated to its current site in 1965 through land donated by the local community. Our mission is to provide quality secondary education and promote holistic development, fostering academic and moral excellence.</p>
+        </section>
+
+        <!-- Academics & Boarding -->
+        <section id="academics" class="grid md:grid-cols-2 gap-12">
+            <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-yellow-500">
+                <h2 class="text-3xl font-black text-blue-900 mb-4">Boarding & Discipline</h2>
+                <p class="text-gray-700 leading-relaxed">Discipline is a cornerstone of the boarding system. The structured environment allows students to manage time effectively, balancing academic work and rest, while hostel life promotes teamwork and tolerance.</p>
+            </div>
+            <div class="bg-white p-8 rounded-xl shadow-md border-b-4 border-yellow-500">
+                <h2 class="text-3xl font-black text-blue-900 mb-4">Languages Department</h2>
+                <p class="text-gray-700 leading-relaxed">Transitioning to the CBC by 2027, the department is evolving into a "Linguistic Centre". We promote critical thinking and ethical reasoning through deep literary analysis and creativity.</p>
+            </div>
+        </section>
+
+        <!-- Leadership -->
+        <section id="life" class="bg-blue-900 text-white p-10 rounded-2xl">
+            <h2 class="text-3xl font-black mb-8 text-yellow-500">Leadership Philosophy</h2>
+            <p class="leading-relaxed">Education at Ikuu is strategic, like a game of chess. The "Maroon Spirit" defines our brotherhood, where student leaders are encouraged to nurture renewable energy solutions and refuse to settle for mediocrity.</p>
+        </section>
+
+    </main>
+
+    <footer class="bg-blue-950 text-white py-12 text-center">
+        <p>&copy; 2026 Ikuu Boys High School. Onwards to Excellence.</p>
     </footer>
 
 </body>
