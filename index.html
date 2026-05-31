@@ -3,50 +3,73 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ikuu Boys High School | Home</title>
+    <title>Ikuu Boys High School | Official Website</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 font-sans text-gray-800">
+<body class="bg-gray-50 text-gray-900 font-sans">
 
-    <nav class="bg-[#1e3a8a] text-white shadow-md sticky top-0 z-50 py-4">
+    <!-- TOP CONTACT BAR -->
+    <div class="bg-blue-950 text-white py-2 px-4 text-[11px] font-semibold tracking-wider">
+        <div class="max-w-7xl mx-auto flex justify-between">
+            <span>📞 0739902196 / 0715054398 | 📧 ikuuboysh@yahoo.co.uk</span>
+            <span>📍 P.O Box 40 – 60400, Chuka, Kenya</span>
+        </div>
+    </div>
+
+    <!-- MAIN NAV -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50 py-4 border-b-4 border-yellow-500">
         <div class="max-w-7xl mx-auto px-4 flex justify-between items-center">
-            <h1 class="font-black text-xl uppercase tracking-wide">IKUU BOYS HIGH SCHOOL</h1>
-            <div class="space-x-6 text-sm font-bold uppercase">
-                <a href="index.html" class="hover:text-yellow-400">Home</a>
-                <a href="portal.html" class="bg-yellow-500 text-blue-950 px-4 py-2 rounded-lg hover:bg-yellow-400 transition">Enter Portal</a>
+            <h1 class="font-black text-2xl uppercase text-blue-900">Ikuu Boys High School</h1>
+            <div class="space-x-8 font-bold text-sm uppercase text-blue-900">
+                <a href="index.html" class="hover:text-yellow-600">Home</a>
+                <a href="#about" class="hover:text-yellow-600">Our Story</a>
+                <a href="portal.html" class="bg-blue-900 text-white px-6 py-2 rounded hover:bg-blue-800 transition">Portal Login</a>
             </div>
         </div>
     </nav>
 
-    <header class="bg-blue-900 py-12 px-4">
-        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-            <div>
-                <h1 class="text-4xl font-black text-white mb-4">Onwards to Excellence</h1>
-                <p class="text-blue-100 mb-6">Welcome to Ikuu Boys High School, a center of academic and moral excellence.</p>
-                <a href="portal.html" class="inline-block bg-yellow-500 text-blue-950 px-6 py-3 rounded-lg font-bold hover:bg-yellow-400">Access Student Portal</a>
+    <!-- HERO SECTION -->
+    <header class="relative w-full h-[550px]">
+        <img src="ikuu gate_2.jpg" class="w-full h-full object-cover" alt="School Gate">
+        <div class="absolute inset-0 bg-blue-900/70 flex items-center justify-center">
+            <div class="text-center text-white px-4">
+                <h2 class="text-6xl font-black mb-4 uppercase">Onwards to Excellence</h2>
+                <p class="text-2xl mb-8 font-light">Nurturing holistic development and academic distinction.</p>
+                <a href="portal.html" class="bg-yellow-500 text-blue-950 px-10 py-4 rounded font-black uppercase hover:bg-yellow-400">Enter Student Portal</a>
             </div>
-            <img src="ikuu gate.jpg" alt="School Gate" class="rounded-2xl shadow-2xl w-full h-80 object-cover">
         </div>
     </header>
 
-    <main class="max-w-5xl mx-auto py-16 px-4">
-        <div class="bg-white p-10 rounded-3xl shadow-md">
-            <h2 class="text-3xl font-black mb-6 text-blue-950">About Our School</h2>
-            <div class="grid md:grid-cols-2 gap-8 mb-8">
-                <img src="students.jpg" class="rounded-xl w-full h-64 object-cover">
-                <img src="stud.jpg" class="rounded-xl w-full h-64 object-cover">
+    <!-- CONTENT SECTION -->
+    <section id="about" class="max-w-7xl mx-auto py-20 px-4">
+        <div class="grid md:grid-cols-2 gap-12 items-center">
+            <div class="space-y-6">
+                <h2 class="text-4xl font-black text-blue-900 border-l-8 border-yellow-500 pl-4">Institutional Profile</h2>
+                <p class="text-lg text-gray-700 leading-relaxed">
+                    Ikuu Boys High School was established in 1964 as a provincial day secondary school under the sponsorship of the Presbyterian Church of East Africa (PCEA). 
+                    The school moved to its current location in 1965, made possible by land donated by the local community.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="students_2.jpg" class="rounded w-full h-40 object-cover shadow-md">
+                    <img src="9.8_2.jpg" class="rounded w-full h-40 object-cover shadow-md">
+                </div>
             </div>
-            <p class="text-lg text-gray-700 leading-relaxed mb-6">
-                Ikuu Boys High School is dedicated to nurturing young minds through a balanced curriculum that emphasizes both academic prowess and character development. Our environment is designed to foster discipline, innovation, and leadership among our students.
-            </p>
-            <p class="text-lg text-gray-700 leading-relaxed">
-                With a focus on excellence, we provide our students with the tools and mentorship necessary to succeed in a competitive world, always upholding our motto: <strong>Onwards to Excellence</strong>.
-            </p>
+            <div class="grid grid-cols-1 gap-4">
+                <img src="stud_2.jpg" class="rounded w-full h-80 object-cover shadow-xl">
+                <div class="bg-blue-900 text-white p-6 rounded">
+                    <h3 class="font-bold text-xl mb-2">Our Mission</h3>
+                    <p class="text-blue-100">To provide quality secondary education and promote holistic development, fostering academic and moral excellence.</p>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <footer class="bg-gray-900 text-white py-8 text-center text-sm">
-        <p>&copy; 2026 Ikuu Boys High School. All rights reserved.</p>
+    <!-- FOOTER -->
+    <footer class="bg-blue-950 text-white py-16 px-4">
+        <div class="max-w-7xl mx-auto text-center">
+            <h4 class="font-black text-2xl mb-4">IKUU BOYS HIGH SCHOOL</h4>
+            <p class="text-blue-300 text-sm">© 2026 Official Website. Onwards to Excellence.</p>
+        </div>
     </footer>
 
 </body>
